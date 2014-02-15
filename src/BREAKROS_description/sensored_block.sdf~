@@ -1,0 +1,38 @@
+<?xml version="1.0" ?>
+<sdf version="1.4">
+  <model name="sensored_block">
+    <link name="wam_link0">
+      <collision name="block_col">
+	<pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+	<geometry>
+	  <box>
+	    <size>1.0 1.0 1.0</size>
+	  </box>
+	</geometry>
+	
+      </collision>
+      <visual name="block_vis">
+	<pose>0.000000 0.000000 0.000000 0.000000 0.000000 0.000000</pose>
+	<geometry>
+	  <box>
+	    <size>1.0 1.0 1.0</size>
+	  </box>
+	</geometry>
+      </visual>
+      <sensor type="contact" name="simple_collision_sensor">
+        <always_on>true</always_on>
+        <update_rate>10.0</update_rate>
+        <contact>
+          <collision>block_col</collision>
+          <topic>simple_contact</topic>
+        </contact>
+	   <plugin name="block_gazebo_ros_bumper_controller" filename="libgazebo_ros_bumper.so">
+          <alwaysOn>true</alwaysOn>
+          <update_rate>10</update_rate>
+          <frameName>world</frameName>
+          <bumperTopicName>sensored_block_bumper</bumperTopicName>
+        </plugin>
+      </sensor>
+    </link>
+  </model>
+</sdf>
